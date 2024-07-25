@@ -40,6 +40,70 @@ SELECT ename , sal , ROUND(sal * 0.15, 2) as fee
 FROM emp 
 WHERE sal BETWEEN 1500 AND 3000 ;
 
+-- 8
+SELECT ename , sal , FLOOR(sal * 1.5) 
+FROM emp 
+WHERE sal >= 2000;
+
+-- 9 입사일부터 지금까지의 날짜수를 출력하라. 부서번호, 이름, 입사일, 현재일, 근무일수(소수점 이하 절삭), 근무년수, 근무월수(30일 기준), 근무주수를 출력하라.
+SELECT deptno , ename , hiredate , CURDATE() ,  
+DATEDIFF(CURDATE(), hiredate) AS total_days, 
+FLOOR(DATEDIFF(CURDATE(), hiredate) / 365) ,
+FLOOR(DATEDIFF(CURDATE(), hiredate) / 30) ,
+FLOOR(DATEDIFF(CURDATE(), hiredate) / 7) 
+FROM emp ;
+
+-- 10 
+SELECT ename , sal , (sal*0.9) AS txsal
+FROM emp 
+-- WHERE 
+ORDER BY txsal desc; 
+
+-- 11 
+SELECT ename , hiredate, ADDDATE(hiredate ,  90 ) , sal
+FROM emp; 
+-- WHERE 
+
+-- 12 
+SELECT ename , hiredate, ADDDATE(hiredate ,  INTERVAL 6 MONTH ) , sal
+FROM emp ;
+
+-- 13 
+SELECT deptno, ename , DATEDIFF(LAST_DAY(hiredate), hiredate) + 1 
+FROM emp; 
+
+-- 14 
+SELECT ename , hiredate , DATE_ADD(hiredate, INTERVAL 60 DAY) AS after_60days,
+ -- 60일 후의 날짜를 기준으로 다음 월요일을 계산
+    DATE_ADD(DATE_ADD(hiredate, INTERVAL 60 DAY), INTERVAL (8 - DAYOFWEEK(DATE_ADD(hiredate, INTERVAL 60 DAY))) % 7 DAY) AS next_monday
+FROM emp; 
+
+-- 15 
+SELECT ename , hiredate , DATEDIFF(CURDATE() , hiredate)
+FROM emp ; 
+
+-- 16 
+SELECT ename , hiredate , CONCAT(DATE_FORMAT(hiredate , "%Y년 %m월 %d일 ") ,
+CASE DAYOFWEEK(hiredate) 
+	WHEN 1 THEN '일요일'
+	WHEN 2 THEN '월요일'
+	WHEN 3 THEN '화요일'
+	WHEN 4 THEN '수요일'
+	WHEN 5 THEN '목요일'
+	WHEN 6 THEN '금요일'
+	WHEN 7 THEN '토요일'
+	END ) AS fom
+FROM emp ;
+
+-- 17 
+SELECT LOWER(LEFT(ename, 3))
+FROM emp
+WHERE LENGTH(ename) >= 6;
+
+
+
+
+
 
 
 

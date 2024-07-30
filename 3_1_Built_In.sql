@@ -101,6 +101,23 @@ FROM emp
 WHERE LENGTH(ename) >= 6;
 
 
+where in( 'sotte ' , 'awd' ) ;
+
+select *
+from emp 
+where hiredate between '1987-01-01' AND  '1987-12-12';
+
+select *
+from emp 
+where ename = 'scott' or ename = 'miller';
+
+select *
+from emp 
+where not deptno = 20 or deptno = 30;
+
+select *
+from emp 
+where ename > 'B' AND ename <'j';
 
 
 
